@@ -2,8 +2,11 @@ name: Ping Backend Every 10 Minutes
 
 on:
   schedule:
-    - cron: "*/10 * * * *"  # her 10 dakikada bir
-  workflow_dispatch:  # istersen manuel tetikleyebil
+    - cron: "*/10 * * * *"  # her 10 dakikada bir çalışır (UTC'ye göre)
+  workflow_dispatch:        # elle de başlatabilirsin
+
+permissions:
+  contents: read
 
 jobs:
   ping:
@@ -11,4 +14,4 @@ jobs:
     steps:
       - name: Send GET request to backend
         run: |
-          curl -X GET https://one01-otomatik-tas-dizme.onrender.com || true
+          curl -L -X GET https://one01-otomatik-tas-dizme.onrender.com || true
